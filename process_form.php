@@ -1,7 +1,6 @@
 <?php
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Inclure le fichier de configuration de la base de données
     require_once "config.php";
     
     // Récupérer les données du formulaire
@@ -15,12 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Préparer la déclaration SQL
     if ($stmt = $mysqli->prepare($sql)) {
-        // Liaison des paramètres
+        // paramètres
         $stmt->bind_param("ssss", $nom, $email, $objet, $message);
         
         // Exécution de la déclaration
         if ($stmt->execute()) {
-            // Redirection vers une page de confirmation
+            // Redirection vers la page de confirmation
             header("location: confirmation.html");
             exit();
         } else {

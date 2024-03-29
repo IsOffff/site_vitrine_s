@@ -1,18 +1,19 @@
 <?php
 session_start();
 
-// Initialiser ou récupérer le panier depuis la session
+// Initialiser le panier depuis la session
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
-// Fonction pour ajouter un produit au panier
+// Ajouter un produit au panier
 function ajouterProduit($nom, $prix) {
+
     // Ajouter le produit à la session du panier
     $_SESSION['cart'][] = array('nom' => $nom, 'prix' => $prix);
 }
 
-// Fonction pour supprimer un produit du panier
+// Supprimer un produit du panier
 function supprimerProduit($index) {
     // Vérifier si l'index existe dans le panier
     if (isset($_SESSION['cart'][$index])) {
@@ -23,14 +24,9 @@ function supprimerProduit($index) {
     }
 }
 
-// Code pour gérer d'autres opérations de panier, comme recalculer le total, etc.
-
-// Exemple d'utilisation des fonctions
 ajouterProduit("Produit A", 10);
 ajouterProduit("Produit B", 20);
 supprimerProduit(0); // Supprimer le premier produit ajouté
-
-// Vous pouvez également inclure d'autres fonctions de manipulation du panier ici
 
 // Afficher le contenu du panier (c'est juste un exemple)
 foreach ($_SESSION['cart'] as $produit) {

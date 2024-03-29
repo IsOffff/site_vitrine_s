@@ -1,13 +1,13 @@
 // Tableau pour stocker les articles dans le panier
 let cart = [];
 
-// Fonction pour ajouter un article au panier
+// Ajouter un article au panier
 function ajouterPanier(nom, prix) {
     cart.push({ nom: nom, prix: prix });
     updateCartDisplay(); // Mettre à jour l'affichage du panier
 }
 
-// Fonction pour supprimer un article du panier
+// Supprimer un article du panier
 function supprimerArticle(nom) {
     // Trouver l'index de l'article dans le panier
     const index = cart.findIndex(article => article.nom === nom);
@@ -20,7 +20,7 @@ function supprimerArticle(nom) {
     }
 }
 
-// Fonction pour afficher les articles dans le panier
+// Afficher les articles dans le panier
 function updateCartDisplay() {
     let cartItemsElement = document.getElementById('cart-items');
     let totalPriceElement = document.getElementById('total-price');
@@ -61,7 +61,7 @@ document.querySelector('.panier-container a').addEventListener('click', function
     updateCartDisplay(); // Mettre à jour l'affichage du panier
 });
 
-// Fonction pour valider le panier et rediriger vers panier.html
+// Valider le panier et rediriger vers panier.html
 function validerPanier() {
     // Redirection vers panier.html
     window.location.href = 'panier.html';
