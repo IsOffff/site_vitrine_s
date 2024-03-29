@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bois'Touret Créations</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Bois'Touret Créations</h1>
+            <nav>
+                <ul>
+                    <li></li> <button onclick="window.location.href='produits.html'">Produits</button>
+                    <li></li> <button onclick="window.location.href='explorer.html'">Explorez</button>
+                    <li></li> <button onclick="window.location.href='personnalisation.html'">Personnalisez-ici</button>
+                    <li></li><button onclick="window.location.href='contact.html'">Contactez-nous</button>
+                </ul>
+            </nav>
+            <div class="panier-container">
+                <a href="panier.html"><i class="fas fa-shopping-basket"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="background-images">
+        <div class="background-image H1" onclick="viewImage('image-back/H1.jpg')"></div>
+        <div class="background-image H2" onclick="viewImage('image-back/H2.jpg')"></div>
+        <div class="background-image H4" onclick="viewImage('image-back/H4.jpg')"></div>
+        <div class="background-image T1" onclick="viewImage('image-back/T1.jpg')"></div>
+        <div class="background-image T2" onclick="viewImage('image-back/T2.jpg')"></div>
+        <div class="background-image T3" onclick="viewImage('image-back/T3.jpg')"></div>
+    </div>
+
+    <div class="image-description-container">
+        <p class="image-description">Nos modèles, uniques et personnalisables, livrés chez vous!</p>
+    </div>
+
+
+    <div class="logo-container">
+        <img src="logo/logoo.jpg" alt="Logo">
+        <div class="welcome-message">
+            <h1 class="welcome-message">Bienvenue sur notre boutique en ligne !</h1>
+            <p>Que vous cherchiez à ajouter une touche d'originalité à votre pièce de vie, ou pour le plaisir d'offrir, découvrez nos tables, consoles et horloges, uniques et design, fabriquées à partir de tourets en bois recyclé. Vous aussi, faites le choix d'une déco élégante et raffinée pour votre intérieur !</p>
+        </div>
+    </div>      
+
+    <footer>
+        <div class="footer-container">
+            <button onclick="window.location.href='a_propos.html'">À propos</button>
+        </div>
+        <div class="footer-container">
+            <div class="social-icons">
+                <a href="https://facebook.com/boistouretcreations" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/boistouretcreations" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.pinterest.fr/boistouretcreations/" target="_blank"><i class="fab fa-pinterest"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function viewImage(imageUrl) {
+            window.open(imageUrl, '_blank');
+        }
+    </script>
+</body>
+</html>

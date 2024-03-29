@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix de bois pour les consoles</title>
+</head>
+<body>
+    <h1>Choisissez le type de bois :</h1>
+    <button id="bois-clair" onclick="choisirBois('clair')">Bois clair</button>
+    <button id="bois-fonce" onclick="choisirBois('foncé')">Bois foncé</button>
+
+    <script>
+        function choisirBois(type) {
+            if (type === 'clair') {
+                window.location.href = 'boisclair.html';
+            } else if (type === 'foncé') {
+                window.location.href = 'consoles-bois-fonce.html';
+            }
+        }
+        
+    </script>
+    <button onclick="window.location.href='index.html'">Retour</button>
+</body>
+</html>
