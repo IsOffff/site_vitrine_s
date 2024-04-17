@@ -1,5 +1,5 @@
 window.onload = function() {
-  mettreAJourNombreArticlesPanier(); // Appel de la fonction après le chargement du DOM
+  mettreAJourNombreArticlesPanier();
 };
 
 function mettreAJourNombreArticlesPanier() {

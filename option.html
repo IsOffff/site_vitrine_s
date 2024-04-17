@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Options</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-dark text-light py-4">
+        <div class="container">
+            <h1 class="mb-0">Options</h1>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var addToCartBtn = document.querySelector('#addToCartBtn');
+            addToCartBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                var diametre = document.getElementById('diametre').value;
+                var hauteur = document.getElementById('hauteur').value;
+                var couleurCerclage = document.getElementById('couleurCerclage').value;
+                var couleurPieds = document.getElementById('couleurPieds').value;
+
+                var article = {
+                    diametre: diametre,
+                    hauteur: hauteur,
+                    couleurCerclage: couleurCerclage,
+                    couleurPieds: couleurPieds
+                };
+                ajouterAuPanier(article);
+                window.location.href = 'panier.html';
+            });
+
+            function ajouterAuPanier(article) {
+                var panier = JSON.parse(localStorage.getItem('panier')) || [];
+                panier.push(article);
+                localStorage.setItem('panier', JSON.stringify(panier));
+            }
+        });
+    </script>
+      
+    <div class="container mt-5">
+        <h2>Article ...</h2>
+        <p>....</p>
+        <img src="chemin/vers/votre/photo.jpg" alt="Photo de l'article">
+        <h3>Options disponibles :</h3>
+        <form>
+            <div class="form-group">
+                <label for="diametre">Diamètre :</label>
+                <select class="form-control" id="diametre">
+                    <option value="75">75 cm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hauteur">Hauteur :</label>
+                <select class="form-control" id="hauteur">
+                    <option value="38">38 cm</option>
+                    <option value="43">43 cm</option>
+                    <option value="75">75 cm</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="couleurCerclage">Couleur du cerclage :</label>
+                <select class="form-control" id="couleurCerclage">
+                    <option value="metal">Métal</option>
+                    <option value="noir">Noir</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="couleurPieds">Couleur des pieds :</label>
+                <select class="form-control" id="couleurPieds">
+                    <option value="rouge">Rouge</option>
+                    <option value="noir">Noir</option>
+                </select>
+            </div>
+            <button type="button" id="addToCartBtn" class="btn btn-primary">Ajouter au panier</button>
+
+            <a href="explorer.html" class="btn btn-secondary">Retour</a>
+        </form>
+    </div>
+
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="footer-container">
+                <button onclick="window.location.href='a_propos.html'">À propos</button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

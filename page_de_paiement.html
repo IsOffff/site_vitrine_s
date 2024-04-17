@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de Paiement</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <header class="bg-dark text-light py-4">
+        <div class="container">
+            <h1 class="mb-0">Paiement</h1>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Validation de la Commande</h2>
+                <form id="billingForm">
+                    <h3>Détails de facturation</h3>
+                    <div class="form-group">
+                        <label for="firstName">Prénom *</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Nom *</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Pays/région *</label>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                    </div>
+
+                    <h3>Expédier à une adresse différente ?</h3>
+                    <h3>Informations complémentaires</h3>
+                    <div class="form-group">
+                        <label for="orderNotes">Notes de commande (facultatif)</label>
+                        <textarea class="form-control" id="orderNotes" name="orderNotes"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Valider la Commande</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                <h2>Options de Paiement</h2>
+                <h3>Paiement par Carte Bancaire</h3>
+                <p>Payez en utilisant votre carte Visa ou Mastercard :</p>
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="card-element">Numéro de carte</label>
+                        <div id="card-element">
+                        </div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <button id="submit-button" class="btn btn-primary">Payer</button>
+                </form>
+
+                <h3>Paiement via PayPal</h3>
+                <p>Payez en utilisant votre compte PayPal :</p>
+                <a href="https://www.paypal.com" class="btn btn-primary">Payer avec PayPal</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="index.html" class="btn btn-link">Accueil</a>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <p>.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        var stripe = Stripe('YOUR_PUBLISHABLE_KEY');
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+        // Gestion de la soumission du formulaire de paiement Stripe
+        var paymentForm = document.getElementById('payment-form');
+        paymentForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(cardElement).then(function(result) {
+                if (result.error) {
+                    // Affichez les erreurs de validation à l'utilisateur
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Envoie le jeton de paiement au serveur pour traitement
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Soumettez le jeton de paiement au serveur pour traitement
+        function stripeTokenHandler(token) {
+            // pour traitement et vérification du paiement
+            fetch('/votre-endpoint-de-paiement', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ token: token })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Une erreur est survenue lors du traitement du paiement.');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+            });
+        }
+    </script>
+    <div class="container mt-3">
+        <a href="panier.html" class="btn btn

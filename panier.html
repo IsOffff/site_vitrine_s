@@ -5,35 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panier</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header class="bg-dark text-light py-4">
         <div class="container">
-            <h1 class="mb-0">Produits dans votre panier</h1>
+            <h1 class="mb-0">Panier</h1>
         </div>
     </header>
 
-    <div id="cart" class="container mt-5">
-        <ul id="cart-items" class="list-group">
-            
-        </p>
+    <div class="container mt-5">
+        <h2>Votre panier</h2>
+        <ul id="cartItems" class="list-group">
+        </ul>
+        <div class="mt-4">
+            <button id="modifyCartBtn" class="btn btn-secondary mr-2">Modifier</button>
+            <button id="paymentBtn" class="btn btn-primary">Paiement</button>
+            <a href="option.html" class="btn btn-info">Retour</a>
+        </div>
     </div>
+    
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <p>.</p>
+        </div>
+    </footer>
 
-    <div class="container text-center mt-5">
-        <p class="text-muted">Veuillez procéder au paiement via PayPal :</p>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-            <input type="hidden" name="cmd" value="_s-xclick">
-            <input type="hidden" name="hosted_button_id" value="IsOfficiall">
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-            <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-        </form>
-        <button class="btn btn-secondary mt-3" onclick="window.location.href='index.html'">Retour</button>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupère les articles depuis localStorage
+            var cartItems = JSON.parse(localStorage.getItem('panier')) || [];
 
-    <script src="panier.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            // Sélectionne l'élément du panier
+            var cartItemsElement = document.getElementById('cartItems');
+
+            // Affiche chaque article dans le panier
+            cartItems.forEach(function(article, index) {
+                var listItem = document.createElement('li');
+                listItem.className = 'list-group-item';
+                listItem.textContent = 'Diamètre: ' + article.diametre + ' - Hauteur: ' + article.hauteur + ' - Couleur cerclage: ' + article.couleurCerclage + ' - Couleur pieds: ' + article.couleurPieds;
+
+                // Création du bouton de suppression
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.className = 'btn btn-danger btn-sm float-right';
+                deleteButton.addEventListener('click', function() {
+                    // Supprime l'article correspondant du panier
+                    cartItems.splice(index, 1);
+                    // Met à jour le panier dans le stockage local
+                    localStorage.setItem('panier', JSON.stringify(cartItems));
+                    // Met à jour l'affichage du panier
+                    renderCartItems();
+                });
+
+                // Ajoute du bouton de suppression à l'élément du panier
+                listItem.appendChild(deleteButton);
+
+                // Ajoute de l'élément du panier à la liste
+                cartItemsElement.appendChild(listItem);
+            });
+
+            // Fonction pour réafficher les éléments du panier
+            function renderCartItems() {
+                // Efface le contenu actuel du panier
+                cartItemsElement.innerHTML = '';
+
+                // Réaffiche chaque article dans le panier
+                cartItems.forEach(function(article, index) {
+                    var listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = 'Diamètre: ' + article.diametre + ' - Hauteur: ' + article.hauteur + ' - Couleur cerclage: ' + article.couleurCerclage + ' - Couleur pieds: ' + article.couleurPieds;
+
+                    // Création du bouton de suppression
+                    var deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Supprimer';
+                    deleteButton.className = 'btn btn-danger btn-sm float-right';
+                    deleteButton.addEventListener('click', function() {
+                        // Supprime l'article correspondant du panier
+                        cartItems.splice(index, 1);
+                        // Met à jour le panier dans le stockage local
+                        localStorage.setItem('panier', JSON.stringify(cartItems));
+                        // Met à jour l'affichage du panier
+                        renderCartItems();
+                    });
+
+                    // Ajoute le bouton de suppression à l'élément du panier
+                    listItem.appendChild(deleteButton);
+
+                    // Ajoute l'élément du panier à la liste
+                    cartItemsElement.appendChild(listItem);
+                });
+            }
+
+            // Appel initial pour afficher les éléments du panier
+            renderCartItems();
+
+            // Gestionnaire d'événements pour le bouton de paiement
+            var paymentBtn = document.getElementById('paymentBtn');
+            paymentBtn.addEventListener('click', function() {
+                // Redirige vers la page de paiement
+                window.location.href = 'page_de_paiement.html';
+            });
+        });
+    </script>
 </body>
 </html>
